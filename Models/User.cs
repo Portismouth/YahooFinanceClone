@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace YahooFinance.Models
 {
