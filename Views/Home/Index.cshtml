@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    <div id="top-bar">
+        <span class="glyphicon glyphicon-home"></span>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Mail</a></li>
+            <li><a href="#">Flickr</a></li>
+            <li><a href="#">Tumblr</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Finance</a></li>
+            <li><a href="#">Entertainment</a></li>
+            <li><a href="#">Lifestyle</a></li>
+            <li><a href="#">Answers</a></li>
+            <li><a href="#">Groups</a></li>
+            <li class="dropdown"><a href="#">More</a></li><i class="fa fa-angle-down"></i>
+        </ul>
+    </div>
+</div>
+<div class="row main-nav">
+    <div class="row search-nav">
+        <img src="~/images/yahoo-finance-logo.png" id="main-logo"></img>
+        <input type="text" placeholder="Search for news, sympbols or companies">
+        <button class="button">Search</button>
+        <span class="glyphicon glyphicon-bell"></span>
+        <span class="glyphicon glyphicon-envelope"></span>
+    </div>
+    <div id="fin-links">
+        <ul>
+            <li><a href="#">Finance Home</a></li>
+            <li><a href="#">Watchlists</a></li>
+            <li><a href="#">My Portfolio</a></li>
+            <div class="dropdown">
+                <li><a href="#">My Screeners</a></li>
+                <ul class="dropdown-menu">
+                    <li class="drop-list"><a href="#">Saved Screens</a></li>
+                    <li class="drop-list"><a href="#">Equity Screener</a></li>
+                    <li class="drop-list"><a href="#">Mutual Fund Screener</a></li>
+                    <li class="drop-list"><a href="#">ETF Screener</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Markets</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Industries</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Personal Finance</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Technology</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Originals</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <li><a href="#">Events</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+        </ul>
+    </div>
+</div>
+<div class="row fin-nav">
+
+        <p>$@ViewBag.DJI["Time Series (1min)"][(string)@ViewBag.DJI["Meta Data"]["3. Last Refreshed"]]["4. close"]</p>
+
+</div>

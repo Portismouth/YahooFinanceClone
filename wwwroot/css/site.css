@@ -1,0 +1,160 @@
+/*Write all of your CSS here*/
+#top-bar {
+    background-color: #2D1152;
+    height: 22px;
+    vertical-align: center;
+    padding: 2px;
+    font-size: 13px;
+    padding-left: 10px;
+}
+#top-bar li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    color: white;
+    padding: 0;
+}
+#top-bar ul{
+    display: inline-block;
+    padding: 0;
+    margin-left: 5px;
+}
+#top-bar a{
+    text-decoration: none;
+    color: white;
+}
+#top-bar a:hover{
+    text-decoration: underline;
+    color: white;
+}
+#top-bar i {
+    color: white;
+}
+#main-logo {
+    width: 114px;
+    height: 46px;
+    margin: 0 2.5% 0 8.5%;
+}
+.main-nav {
+    background: linear-gradient( rgb(252, 252, 253), rgba(236, 233, 239, 0.781));
+}
+.main-nav button{
+    background-color: #3775DD;
+    border-radius: 3px;
+    padding: 7.5px 35px;
+    color: white;
+    border-style: none;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+.main-nav input{
+    width: 34%;
+    height: 35px;
+    padding: 8px 15px;
+    margin-left: 0;
+    border-width: thin; 
+}
+.main-nav li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 25px;
+    padding: 10px 0 12px 0;
+    margin-top: 5px;
+    font-size: 13px;
+    border-bottom: 3px solid rgba(236, 233, 239, 0.781);
+    transition: border-bottom .15s ease linear;
+}
+.main-nav a:hover > .main-nav a {
+    color: red;
+}
+.main-nav li:hover{
+    border-bottom: 3px solid #188fff;
+}
+.main-nav ul{
+    margin-left: 2%;
+    margin-bottom: 0px;
+}
+.search-nav {
+    padding: 10px 0;
+}
+#fin-links:hover ul:hover a {
+    color: grey;
+}
+#fin-links:hover ul:hover a:hover {
+    color: #2D1152;
+}
+.glyphicon-bell {
+    font-size: 30px;
+    color: #2D1152;
+    vertical-align: middle;
+    margin-left: 10%;
+}
+.glyphicon-envelope {
+    font-size: 30px;
+    color: #2D1152;
+    vertical-align: middle;
+    margin-left: 2%;
+}
+.main-nav a{
+    text-decoration: none;
+    color: #2D1152;
+    font-weight: bold;
+    height: 15%;
+} 
+.glyphicon-home {
+    color: white;
+    margin: 0; 
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    
+}
+.dropdown .dropdown-menu {
+    position: absolute;
+    min-width: 300px;
+    /**
+     * Set the top of the dropdown menu to be positioned 100%
+     * from the top of the container, and aligned to the left.
+     */
+    top: 100%;
+    left: 0;
+
+    /** Allow no empty space between this and .dropdown */
+    margin: 0;
+}
+.dropdown .dropdown-menu li{
+    margin: 0;
+}
+.dropdown:hover .dropdown-menu {
+
+    /** Show dropdown menu */
+    display: block;
+    background-color: white;
+}
+/* .dropdown-menu {
+    background-color: white;
+    width: 50%;
+} */
+.dropdown-menu li a {
+    font-weight: bold; 
+    border: none;
+    text-decoration: none;
+    color: #383838
+}
+.dropdown-menu li a:hover {
+    background-color: #188fff !important;
+}
+li.drop-list {
+    border: none;
+    width: 100%;
+}
+li.drop-list:hover {
+    background-color: #188fff;
+}
+ul.drop-list {
+    margin: 0;
+    padding: 0;
+}
+a.drop-list {
+    color: black;
+}
