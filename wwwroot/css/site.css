@@ -139,10 +139,12 @@
     font-weight: bold; 
     border: none;
     text-decoration: none;
-    color: #383838
+    color: #383838 !important;
+    transform: none !important;
 }
 .dropdown-menu li a:hover {
     background-color: #188fff !important;
+    text-decoration: none;
 }
 li.drop-list {
     border: none;
@@ -157,4 +159,17 @@ ul.drop-list {
 }
 a.drop-list {
     color: black;
+}
+.mkt-name {
+    font-weight: bold;
+    color: #188fff;
+}
+.price {
+    font-weight: bold;
+    color: #383838;
+}
+.mkt-overview li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 5%;
 }
