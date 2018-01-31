@@ -168,8 +168,20 @@ a.drop-list {
     font-weight: bold;
     color: #383838;
 }
+.mkt-overview {
+    margin-top: 20px; 
+}
 .mkt-overview li {
     list-style: none;
     display: inline-block;
-    margin-right: 5%;
+    padding-left: 1%;
+    padding-right: 11%;
+    border-right: 1px solid rgb(240, 240, 240);
+}
+.mkt-overview a {
+    color: #188fff;
+}
+canvas {
+    display: inline-block;
+    justify-self: right;
 }

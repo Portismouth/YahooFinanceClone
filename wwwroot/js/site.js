@@ -10,3 +10,28 @@ window.onclick = function (e) {
         }
     }
 }
+
+//slide
+$(document).on('ready', function () {
+
+//     $(".regular").slick({
+//         dots: false,
+//         infinite: false,
+//         slidesToShow: 4,
+//         slidesToScroll: 4
+//     });
+
+    $('#stock-name').keyup(function () {
+        console.log("here");
+        console.log("parent's serialize returned ", $(this).parent().serialize())
+        $.ajax({
+            url: 'stock-index/find',
+            method: 'post',
+            data: $(this).parent().serialize(),
+            success: function(serverResponse){
+                console.log('success', serverResponse);
+            }
+        });
+    });
+
+});
