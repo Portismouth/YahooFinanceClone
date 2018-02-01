@@ -2,8 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations;
 namespace YahooFinance.Models
 {
-   
-
     public class Register : BaseEntity
     {
         public int UserId{get;set;}
@@ -50,8 +48,6 @@ namespace YahooFinance.Models
         public Register RegUser {get; set;}
 
         public  Login LogUser {get; set;}
-        
-
     }
 }
 

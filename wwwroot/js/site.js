@@ -22,8 +22,6 @@ $(document).on('ready', function () {
 //     });
 
     $('#stock-name').keyup(function () {
-        console.log("here");
-        console.log("parent's serialize returned ", $(this).parent().serialize())
         $.ajax({
             url: 'stock-index/find',
             method: 'post',

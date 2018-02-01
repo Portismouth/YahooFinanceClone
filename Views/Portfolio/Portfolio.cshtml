@@ -24,7 +24,7 @@
     <div class="row search-nav">
         <img src="~/images/yahoo-finance-logo.png" id="main-logo"></img>
         <form action="/stock-index/find" method="POST" class="search-form">
-            <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query">
+            <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="index-starts-with">
             <button class="button">Search</button>
         </form>
         <span class="glyphicon glyphicon-bell"></span>
@@ -83,7 +83,28 @@
         </ul>
     </div>
 </div>
-<div class="mkt-overview">
-    
+<div class="portfolio-head">
+    <h4><span>My Portfolios</span>/My Watchlist</h4>
+    <a href="#"><span class="glyphicon glyphicon-plus" style="-webkit-text-stroke: 2.5px white; font-size: 16px;"></span>Create Portfolio</a>
+    <a href="#">Settings</a>
+</div> 
+<div class="summary">
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Last Price</th>
+                <th>Shares</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#">TSLA</a></td>
+                <td>Some value</td>
+                <td>Some value</td>
+                <td>Some value</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-

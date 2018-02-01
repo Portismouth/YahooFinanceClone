@@ -1,0 +1,26 @@
+<ul>
+    <li>
+        <p class="mkt-name">
+            <a>S&P 500</a>
+        </p>
+        <p class="price">@ViewBag.SP500["Time Series (1min)"][(string)@ViewBag.SP500["Meta Data"]["3. Last Refreshed"]]["4. close"]</p>
+    </li>
+    <li>
+        <p class="mkt-name">
+            <a>Dow 30</a>
+        </p>
+        <p class="price">@ViewBag.DJI["Time Series (1min)"][(string)@ViewBag.DJI["Meta Data"]["3. Last Refreshed"]]["4. close"]</p>
+    </li>
+    <li>
+        <p class="mkt-name">
+            <a href="#">Nasdaq</a>
+        </p>
+        <p class="price">@ViewBag.Nasdaq["Time Series (1min)"][(string)@ViewBag.Nasdaq["Meta Data"]["3. Last Refreshed"]]["4. close"]</p>
+    </li>
+    <li>
+        <p class="mkt-name">
+            <a href="#">Russel 2000</a>
+        </p>
+        <p class="price">@ViewBag.RUT["Time Series (1min)"][(string)@ViewBag.RUT["Meta Data"]["3. Last Refreshed"]]["4. close"]</p>
+    </li>
+</ul>

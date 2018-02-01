@@ -11,5 +11,11 @@ namespace YahooFinance.Models
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public List<Portfolio> Portfolios { get; set; }
+
+        public User()
+        {   
+            Portfolios = new List<Portfolio>();    
+        }
     }
 }

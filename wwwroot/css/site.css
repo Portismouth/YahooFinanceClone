@@ -46,13 +46,13 @@
     border-style: none;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
-.main-nav input{
+/* .main-nav input{
     width: 34%;
     height: 35px;
     padding: 8px 15px;
     margin-left: 0;
     border-width: thin; 
-}
+} */
 .main-nav li{
     list-style: none;
     display: inline-block;
@@ -184,4 +184,14 @@ a.drop-list {
 canvas {
     display: inline-block;
     justify-self: right;
+}
+.search-form {
+    display: inline-block;
+}
+.search-form input{
+    width: 34%;
+    height: 35px;
+    padding: 8px 15px;
+    margin-left: 0;
+    border-width: thin; 
 }
