@@ -1,0 +1,26 @@
+@model YahooFinance.Models.Login
+
+
+
+
+<div class="container">
+
+
+<h1>Login!</h1>
+    <!-- <a class="link" asp-action="Index" asp-controller="Home">Not a user? Sign up!</a> -->
+    <form asp-action="login" asp-controller="Account">
+        <span asp-validation-for="Email"></span>
+        <br>
+        <label>Email:</label>
+        <input asp-for="Email" class="form-control">
+        @TempData["email"]
+        <br>
+         <span asp-validation-for="Password"></span>
+        <br>
+    @TempData["password"]
+        <label>Password:</label>
+        <input asp-for="Password" class="form-control">
+        <br>
+        <button type="submit" class="btn btn-info">Login!</button>
+    </form>
+</div>
