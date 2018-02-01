@@ -13,82 +13,64 @@ using System.Linq;
 
 namespace YahooFinance.Controllers
 {
-
-
     public class AccountController : Controller
     {
-
         private YahooFinanceContext _context;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-
-        public AccountController(YahooFinanceContext context, UserManager<User> userManager,
-                SignInManager<User> signInManager)
+        // private readonly UserManager<User> _userManager;
+        // private readonly SignInManager<User> _signInManager;
+        public AccountController(YahooFinanceContext context)
         {
             _context = context;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
-
 
         [HttpGet]
-        [Route("/RegisterUser")]
+        [Route("register")]
 
-        public IActionResult RegisterPage()
+        public IActionResult Register()
         {
 
-            return View("Register");
+            return View();
         }
 
-        
-
         [HttpPost]
-        [Route("/register")]
-        public async Task<IActionResult> Register(Register regUser)
+        [Route("register")]
+        public IActionResult Register(Register regUser)
         {
             User exists = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
             if (ModelState.IsValid)
             {
                 if (exists != null)
                 {
-                    ModelState.AddModelError("Email", "An account with this email already exists!");
-                    return RedirectToAction("RegisterPage");
+                    TempData["UserError"] = "An account with this email already exists!";
+                    return View();
                 }
                 else
                 {
-
-
+                    PasswordHasher<Register> hasher = new PasswordHasher<Register>();
+                    string HashedPW = hasher.HashPassword(regUser, regUser.Password);
                     User newUser = new User
                     {
                         FirstName = regUser.FirstName,
                         LastName = regUser.LastName,
-                        Email  = regUser.Email,
-                        UserName = regUser.Email
-                        // PasswordHash = regUser.Password
+                        Email = regUser.Email,
+                        Password = HashedPW,
                     };
-                    IdentityResult result = await _userManager.CreateAsync(newUser, regUser.Password);
-                    if(result.Succeeded)
-        {
-            HttpContext.Session.SetString("UserId", newUser.Id);
-            // HttpContext.Session.SetInt32("UserId", exists.Id);
-            //Sign In the newly created User
-            //We're using the SignInManager, not the UserManager!
-            // await _signInManager.SignInAsync(newUser, isPersistent: false);
-        }
-        //If the creation failed, add the errors to the View Model
-        foreach( var error in result.Errors )
-        {
-        }
-    }
-                
-            }
-            return RedirectToAction("RegisterPage");
+                    _context.Add(newUser);
+                    _context.SaveChanges();
 
+                    User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
+                    HttpContext.Session.SetInt32("UserId", LoggedIn.UserId);
+                    //If the creation failed, add the errors to the View Model
+                    return Redirect("/");
+                }
+
+            }
+            return View();
         }
 
 
         [HttpGet]
-        [Route("/LoginPage")]
+        [Route("signin")]
 
         public IActionResult LoginPage()
         {
@@ -98,36 +80,45 @@ namespace YahooFinance.Controllers
 
 
 
-    [HttpPost]
-    [Route("signin")]
-    public async Task<IActionResult> Login(Login model)
-    {
-        if (ModelState.IsValid)
+        [HttpPost]
+        [Route("signin")]
+        public IActionResult LoginPage(Login model)
         {
-            User LoggingIn = _context.users.Where(u => u.Email == model.Email).SingleOrDefault();
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-            if (result.Succeeded)
+            if (!ModelState.IsValid)
             {
-                User LoggedIn = _context.users.SingleOrDefault(u => u.Email == model.Email);
-                HttpContext.Session.SetString("UserId", LoggedIn.Id);
-                return RedirectToAction("Index", "Home");
+                return View();
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                TempData["PWError"] = "Invalid login attempt.";
-                return View(model);
+                User LoggingIn = _context.Users.SingleOrDefault(user => user.Email == model.Email);
+                if (LoggingIn == null)
+                {
+                    ViewBag.NoUser = "It looks like you need to register!";
+                    return View();
+                }
+                else
+                {
+                    PasswordHasher<Login> hasher = new PasswordHasher<Login>();
+                    if (hasher.VerifyHashedPassword(model, LoggingIn.Password, model.Password) == 0)
+                    {
+                        ViewBag.NoUser = "Invalid Email or Password";
+                        return View();
+                    }
+                    else
+                    {
+                        //Grabbing User from DB and putting into session
+                        User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == model.Email);
+                        HttpContext.Session.SetInt32("UserId", LoggedIn.UserId);
+                        HttpContext.Session.SetString("UserName", LoggedIn.FirstName);
+                        ViewBag.NoUser = "";
+                        return Redirect("/");
+                    }
+                }
             }
         }
 
-        // If we got this far, something failed, redisplay form
-        return View(model);
-    }
 
 
-        
 
 
 
