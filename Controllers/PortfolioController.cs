@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using YahooFinance.Controllers;
+using YahooFinance.Models;
 
 namespace YahooFinance.Controllers
 {
@@ -16,6 +18,12 @@ namespace YahooFinance.Controllers
         [Route("portfolio")]
         public IActionResult Portfolio()
         {
+
+          int? id = HttpContext.Session.GetInt32("UserId");
+         TempData["userName"] = HttpContext.Session.GetString("UserName");
+
+
+            
 
             return View();
         }
@@ -46,5 +54,8 @@ namespace YahooFinance.Controllers
 
             return View();
         }
+
+
+    
     }
 }

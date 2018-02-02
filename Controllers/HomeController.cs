@@ -8,15 +8,20 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Globalization;
+using YahooFinance.Controllers;
+using YahooFinance.Models;
 
 namespace YahooFinance.Controllers
 {
     public class HomeController : Controller
     {
+
+        private YahooFinanceContext _context;
         private static List<Dictionary<string,string>> _stocks;
 
-        public HomeController()
+        public HomeController(YahooFinanceContext context)
         {
+            _context = context;
             WebRequest.FindStockData("any", JsonResponse =>
                 {
                     _stocks = JsonResponse;
@@ -29,6 +34,17 @@ namespace YahooFinance.Controllers
         [Route("")]
         public IActionResult Index()
         {
+             int? id = HttpContext.Session.GetInt32("UserId");
+          TempData["userName"] = HttpContext.Session.GetString("UserName");
+
+
+           User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
+            ViewBag.UserInfo = UserInfo;
+
+            
+
+
+
             // var DJI = new Dictionary<string, object>();
             // WebRequest.GetMarketData("TIME_SERIES_INTRADAY", "DJI", "1min", JsonResponse =>
             //     {
