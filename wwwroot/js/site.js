@@ -24,6 +24,8 @@ $(document).on('ready', function () {
             }
         });
     });
+
+    
 });
     // $(function() {
     //     $("#stock-name").autocomplete({
