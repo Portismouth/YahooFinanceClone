@@ -34,18 +34,12 @@ namespace YahooFinance.Controllers
         [Route("")]
         public IActionResult Index()
         {
-<<<<<<< HEAD
              int? id = HttpContext.Session.GetInt32("UserId");
           TempData["userName"] = HttpContext.Session.GetString("UserName");
           ViewBag.UserId = id;
 
 
            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
-=======
-            int? id = HttpContext.Session.GetInt32("UserId");
-            TempData["userName"] = HttpContext.Session.GetString("UserName");
-            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
->>>>>>> upstream/master
             ViewBag.UserInfo = UserInfo;
             // var DJI = new Dictionary<string, object>();
             // WebRequest.GetMarketData("TIME_SERIES_INTRADAY", "DJI", "1min", JsonResponse =>
