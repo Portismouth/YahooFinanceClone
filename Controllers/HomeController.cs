@@ -36,6 +36,7 @@ namespace YahooFinance.Controllers
         {
              int? id = HttpContext.Session.GetInt32("UserId");
           TempData["userName"] = HttpContext.Session.GetString("UserName");
+          ViewBag.UserId = id;
 
 
            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);

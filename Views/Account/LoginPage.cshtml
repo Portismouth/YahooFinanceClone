@@ -5,9 +5,10 @@
 
 <div class="container">
 
+@ViewBag.Invalid
 
 <h1>Login!</h1>
-    <!-- <a class="link" asp-action="Index" asp-controller="Home">Not a user? Sign up!</a> -->
+    <a class="link" asp-action="Register" asp-controller="Account">Not a user? Sign up!</a>
     <form asp-action="login" asp-controller="Account">
         <span asp-validation-for="Email"></span>
         <br>
