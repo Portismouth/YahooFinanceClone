@@ -22,7 +22,7 @@
 </div>
 <div class="row main-nav">
     <div class="row search-nav">
-        <img src="~/images/yahoo-finance-logo.png" id="main-logo"></img>
+        <a href="/"><img src="~/images/yahoo-finance-logo.png" id="main-logo"></img></a>
         <form action="/stock-index/find" method="POST" class="search-form">
             <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query"> <button class="button">Search</button>
         </form>
@@ -82,6 +82,7 @@
         </ul>
     </div>
 </div>
+
 <div class="stock-overview">
     <h2>@ViewBag.Stock["companyName"]</h2>
     <ul>
@@ -92,8 +93,8 @@
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
         new TradingView.widget({
-        "width": 980,
-        "height": 610,
+        "width": 750,
+        "height": 400,
         "symbol": "@ViewBag.stock["symbol"]",
         "interval": "D",
         "timezone": "Etc/UTC",
@@ -106,4 +107,19 @@
         "hideideas": true
         });
     </script>
+</div>
+<hr>
+<div class="market-news">
+    <h4>Lates News on @ViewBag.Stock["companyName"]</h4>
+    <ul>
+        @foreach(var story in @ViewBag.StockNews)
+        {
+            <div class="story-container">
+                <li>
+                    <h5><a href="@story["url"]">@story["headline"]</a></h5>
+                </li>
+                <hr>
+            </div>
+        }
+    </ul>
 </div>

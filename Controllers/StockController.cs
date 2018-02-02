@@ -26,7 +26,15 @@ namespace YahooFinance.Controllers
                 }
             ).Wait();
 
+            List<Dictionary<string,string>> StockNews = new List<Dictionary<string,string>>();
+            WebRequest.IndyStockNews(symbol, JsonResult =>
+                {
+                    StockNews = JsonResult;
+                }
+            ).Wait();
+
             ViewBag.Stock = Stock;
+            ViewBag.StockNews = StockNews;
             return View();
         }
 
