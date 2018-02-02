@@ -28,7 +28,22 @@
         </form>
         <span class="glyphicon glyphicon-bell"></span>
         <span class="glyphicon glyphicon-envelope"></span>
-    </div>
+
+    
+        </div>
+         @{
+            if(ViewBag.UserId == null){
+        <a href="/signin"><button >Signin</button></a>
+
+            }
+            else
+            {
+                <a href="/logout"><button >Logout</button></a> <br>
+
+                <h4>Welcome @TempData["userName"]</h4>
+            }
+        }
+      
     <div id="fin-links">
         <ul>
             <li><a href="/">Finance Home</a></li>
@@ -80,7 +95,9 @@
                 </ul>
             </div>
         </ul>
+        
     </div>
+    
 </div>
 <div class="mkt-overview">
     <h4>Today's Most Active Stocks</h4>
@@ -122,4 +139,4 @@
 </div>
 
 
-<p>@TempData["userName"]</p>
+

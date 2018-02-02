@@ -57,9 +57,9 @@ namespace YahooFinance.Controllers
                     _context.Add(newUser);
                     _context.SaveChanges();
 
-                    User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
-                    HttpContext.Session.SetInt32("UserId", LoggedIn.UserId);
-                    HttpContext.Session.SetString("userName", LoggedIn.FirstName);
+                      User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
+                        HttpContext.Session.SetInt32("UserId", LoggedIn.UserId);
+                        HttpContext.Session.SetString("UserName", LoggedIn.FirstName);
 
 
                     int? id = HttpContext.Session.GetInt32("UserId");
@@ -76,6 +76,7 @@ namespace YahooFinance.Controllers
                     _context.SaveChanges();
 
                     
+                   
 
 
 
@@ -112,7 +113,8 @@ namespace YahooFinance.Controllers
                 User LoggingIn = _context.Users.SingleOrDefault(user => user.Email == model.Email);
                 if (LoggingIn == null)
                 {
-                    ViewBag.NoUser = "It looks like you need to register!";
+                        ViewBag.Invalid = "Invalid Email or Password";
+                    // ViewBag.NoUser = "It looks like you need to register!";
                     return View();
                 }
                 else
@@ -120,7 +122,7 @@ namespace YahooFinance.Controllers
                     PasswordHasher<Login> hasher = new PasswordHasher<Login>();
                     if (hasher.VerifyHashedPassword(model, LoggingIn.Password, model.Password) == 0)
                     {
-                        ViewBag.NoUser = "Invalid Email or Password";
+                        ViewBag.Invalid = "Invalid Email or Password";
                         return View();
                     }
                     else
@@ -135,5 +137,30 @@ namespace YahooFinance.Controllers
                 }
             }
         }
+
+
+        [HttpGet]
+        [Route("/logout")]
+
+        public IActionResult Logout ()
+        {
+
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
