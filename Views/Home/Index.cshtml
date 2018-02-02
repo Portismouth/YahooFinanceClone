@@ -24,8 +24,7 @@
     <div class="row search-nav">
         <img src="~/images/yahoo-finance-logo.png" id="main-logo"></img>
         <form action="/stock-index/find" method="POST" class="search-form">
-            <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query">
-            <button class="button">Search</button>
+            <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query"> <button class="button">Search</button>
         </form>
         <span class="glyphicon glyphicon-bell"></span>
         <span class="glyphicon glyphicon-envelope"></span>
@@ -84,6 +83,15 @@
     </div>
 </div>
 <div class="mkt-overview">
+    <ul>
+        @foreach(var stock in @ViewBag.MostActive)
+        {
+            <li>
+            <p class="mkt-name"><a href="#">@stock["symbol"]</a></p>
+            <p class="price">@stock["latestPrice"]</p>
+            </li>
+        }
+    </ul>
     
 </div>
 
