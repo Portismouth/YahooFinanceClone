@@ -170,10 +170,12 @@ a.drop-list {
 }
 .mkt-overview {
     margin-top: 20px; 
+    width: auto;
 }
 .mkt-overview li {
     list-style: none;
     display: inline-block;
+    
     padding-left: 1%;
     padding-right: 5%;
     border-right: 1px solid rgb(240, 240, 240);
@@ -205,4 +207,7 @@ background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
 }
 .mkt-overview p {
     margin: 0;
+}
+.mkt-overview img {
+    display: inline-block;
 }

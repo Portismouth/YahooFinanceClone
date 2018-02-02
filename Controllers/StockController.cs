@@ -32,9 +32,9 @@ namespace YahooFinance.Controllers
 
         [HttpPost]
         [Route("search")]
-        public IActionResult Search(string symbol)
+        public IActionResult Search(string query)
         {
-            return Redirect($"/stock/{symbol}");
+            return Redirect($"/stock/{query}");
         }
     }
 }
