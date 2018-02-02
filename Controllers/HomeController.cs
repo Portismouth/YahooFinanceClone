@@ -17,7 +17,7 @@ namespace YahooFinance.Controllers
     {
 
         private YahooFinanceContext _context;
-        private static List<Dictionary<string,string>> _stocks;
+        private static List<Dictionary<string, string>> _stocks;
 
         public HomeController(YahooFinanceContext context)
         {
@@ -28,7 +28,7 @@ namespace YahooFinance.Controllers
                 }
             ).Wait();
         }
-        
+
         // GET: /Home/
         [HttpGet]
         [Route("")]
@@ -40,12 +40,10 @@ namespace YahooFinance.Controllers
 
 
            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
+            int? id = HttpContext.Session.GetInt32("UserId");
+            TempData["userName"] = HttpContext.Session.GetString("UserName");
+            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
             ViewBag.UserInfo = UserInfo;
-
-            
-
-
-
             // var DJI = new Dictionary<string, object>();
             // WebRequest.GetMarketData("TIME_SERIES_INTRADAY", "DJI", "1min", JsonResponse =>
             //     {
@@ -79,14 +77,22 @@ namespace YahooFinance.Controllers
             // ViewBag.Nasdaq = Nasdaq;
             // ViewBag.RUT = RUT; 
 
-            List<Dictionary<string,string>> MostActive = new List<Dictionary<string, string>>();
-            WebRequest.MostActive(JsonResponse => 
+            List<Dictionary<string, string>> MostActive = new List<Dictionary<string, string>>();
+            WebRequest.MostActive(JsonResponse =>
                 {
                     MostActive = JsonResponse;
                 }
             ).Wait();
 
+            List<Dictionary<string,string>> LatestNews = new List<Dictionary<string,string>>();
+            WebRequest.LatestNews(JsonResponse => 
+                {
+                    LatestNews = JsonResponse;
+                }
+            ).Wait();
+
             ViewBag.MostActive = MostActive;
+            ViewBag.LatestNews = LatestNews;
 
             return View();
         }
@@ -102,14 +108,14 @@ namespace YahooFinance.Controllers
             //     }
             // ).Wait();
 
-            List<Dictionary<string,string>> Matches = new List<Dictionary<string,string>>();
-            
-            foreach(var idx in _stocks)
+            List<Dictionary<string, string>> Matches = new List<Dictionary<string, string>>();
+
+            foreach (var idx in _stocks)
             {
-                foreach(KeyValuePair<string,string> pair in idx)
-                {         
+                foreach (KeyValuePair<string, string> pair in idx)
+                {
                     TextInfo myTI = new CultureInfo("en-US").TextInfo;
-                    if(pair.Value.Contains(query) || pair.Value.Contains(query.ToUpperInvariant()) )
+                    if (pair.Value.Contains(query) || pair.Value.Contains(query.ToUpperInvariant()))
                     {
                         Matches.Add(new Dictionary<string, string>(idx));
                     }
@@ -117,16 +123,16 @@ namespace YahooFinance.Controllers
             }
 
             List<Dictionary<string, object>> RelMatches = new List<Dictionary<string, object>>();
-            
-            foreach(var idx in Matches)
+
+            foreach (var idx in Matches)
             {
-                Dictionary<string,object> match = new Dictionary<string,object>();
+                Dictionary<string, object> match = new Dictionary<string, object>();
                 WebRequest.IndyCapInfo(idx["symbol"], JsonResponse =>
                     {
                         match = JsonResponse;
                     }
                 ).Wait();
-                RelMatches.Add(new Dictionary<string,object>(match));
+                RelMatches.Add(new Dictionary<string, object>(match));
             }
 
             return RelMatches.OrderByDescending(i => i["marketCap"]);

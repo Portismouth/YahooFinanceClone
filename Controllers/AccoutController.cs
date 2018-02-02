@@ -65,14 +65,12 @@ namespace YahooFinance.Controllers
                     int? id = HttpContext.Session.GetInt32("UserId");
                     User currentUser = _context.Users.SingleOrDefault(u => u.UserId == (int)id);
 
-                     Portfolio thisportfolio = _context.Portfolios.SingleOrDefault(w => w.PortfolioId == (int)id);
+                    Portfolio thisportfolio = _context.Portfolios.SingleOrDefault(w => w.PortfolioId == (int)id);
 
                     Portfolio newPortfolio = new Portfolio
                     {
                         UserId = currentUser.UserId,
                         PortName = "Watchlist",
-                        
-                       
                     };
                      _context.Add(newPortfolio);
                     _context.SaveChanges();
@@ -151,18 +149,5 @@ namespace YahooFinance.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

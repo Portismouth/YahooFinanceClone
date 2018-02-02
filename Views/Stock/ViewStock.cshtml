@@ -23,27 +23,12 @@
 <div class="row main-nav">
     <div class="row search-nav">
         <img src="~/images/yahoo-finance-logo.png" id="main-logo"></img>
-        <form action="/search" method="POST" class="search-form">
+        <form action="/stock-index/find" method="POST" class="search-form">
             <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query"> <button class="button">Search</button>
         </form>
         <span class="glyphicon glyphicon-bell"></span>
         <span class="glyphicon glyphicon-envelope"></span>
-
-    
-        </div>
-         @{
-            if(ViewBag.UserId == null){
-        <a href="/signin"><button >Signin</button></a>
-
-            }
-            else
-            {
-                <a href="/logout"><button >Logout</button></a> <br>
-
-                <h4>Welcome @TempData["userName"]</h4>
-            }
-        }
-      
+    </div>
     <div id="fin-links">
         <ul>
             <li><a href="/">Finance Home</a></li>
@@ -95,47 +80,12 @@
                 </ul>
             </div>
         </ul>
-        
     </div>
-    
 </div>
-<div class="mkt-overview">
-    <h4>Today's Most Active Stocks</h4>
+<div class="stock-overview">
+    <h2>@ViewBag.Stock["companyName"]</h2>
     <ul>
-        @foreach(var stock in @ViewBag.MostActive)
-        {
-            double open = Convert.ToDouble(@stock["open"]);
-            double latest = Convert.ToDouble(@stock["latestPrice"]);
-            double activity = latest - open;
-            <li>
-                <p class="mkt-name"><a href="/stock/@stock["symbol"]">@stock["symbol"]</a></p>
-                <p class="price">@stock["latestPrice"]</p>
-                @if(activity >= 0)
-                {
-                    <p class="activity" style="color: green;">@activity.ToString("0.00")</p>
-                }
-                else
-                {
-                    <p class="activity" style="color: red;">@activity.ToString("0.00")</p>
-                }
-            </li>
-        }
+        <li>Open: @ViewBag.Stock["open"]</li>
+        <li>Latest: @ViewBag.Stock["latestPrice"]</li>
     </ul>
 </div>
-<div class="market-news">
-    <h4>Financial News</h4>
-    <ul>
-        @foreach(var story in @ViewBag.LatestNews)
-        {
-            <div class="story-container">
-                <li>
-                    <h5><a href="@story["url"]">@story["headline"]</a></h5>
-                </li>
-                <hr>
-            </div>
-        }
-    </ul>
-</div>
-
-
-
