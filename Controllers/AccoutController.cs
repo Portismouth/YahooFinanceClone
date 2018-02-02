@@ -53,7 +53,11 @@ namespace YahooFinance.Controllers
                         Email = regUser.Email,
                         Password = HashedPW,
                     };
+
                     _context.Add(newUser);
+
+                    
+
                     _context.SaveChanges();
 
                     User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);

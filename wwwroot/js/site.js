@@ -13,23 +13,53 @@ window.onclick = function (e) {
 
 //slide
 $(document).on('ready', function () {
-
-//     $(".regular").slick({
-//         dots: false,
-//         infinite: false,
-//         slidesToShow: 4,
-//         slidesToScroll: 4
-//     });
-
     $('#stock-name').keyup(function () {
         $.ajax({
             url: 'stock-index/find',
-            method: 'post',
+            method: 'get',
             data: $(this).parent().serialize(),
             success: function(serverResponse){
                 console.log('success', serverResponse);
+
             }
         });
     });
-
 });
+    // $(function() {
+    //     $("#stock-name").autocomplete({
+    //         source: function(request,response){
+    //             $.ajax( {
+    //                 url: 'stock-index/find',
+    //                 method: "post",
+    //                 data: $(this).parent().serialize(),
+    //                 success: function( data ) {
+    //                     response( data );
+    //                 }
+    //             });
+    //         },
+    //         minLength: 2
+    //     });
+    // });
+
+    // $("#stock-name").autocomplete({
+    //     source: function (request, response) {
+            
+    //         $.ajax({
+    //             url: 'stock-index/find',
+    //             data: {
+    //                 query: request.term
+    //             },
+    //             success: function(serverResponse){
+    //                 console.log(serverResponse);
+    //                 serverResponse.forEach(element => {
+    //                     console.log(element["symbol"]);
+    //                     console.log(element["companyName"]);
+    //                 })
+    //                 response(serverResponse);
+    //             }
+    //         });
+    //     },
+    //     select: function (event, ui) {
+    //         console.log(ui.name)
+    //     }
+    //     })

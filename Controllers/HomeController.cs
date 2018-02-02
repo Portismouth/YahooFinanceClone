@@ -15,13 +15,20 @@ namespace YahooFinance.Controllers
 {
     public class HomeController : Controller
     {
+
         private YahooFinanceContext _context;
+        private static List<Dictionary<string,string>> _stocks;
 
         public HomeController(YahooFinanceContext context)
         {
             _context = context;
+            WebRequest.FindStockData("any", JsonResponse =>
+                {
+                    _stocks = JsonResponse;
+                }
+            ).Wait();
         }
-
+        
         // GET: /Home/
         [HttpGet]
         [Route("")]
@@ -71,43 +78,39 @@ namespace YahooFinance.Controllers
             // ViewBag.Nasdaq = Nasdaq;
             // ViewBag.RUT = RUT; 
 
-            // var MostActive = new List<KeyValuePair<string, string>>();
-            // WebRequest.MostActive(JsonResponse => 
-            //     {
-            //         MostActive = JsonResponse;
-            //     }
-            // ).Wait();
+            List<Dictionary<string,string>> MostActive = new List<Dictionary<string, string>>();
+            WebRequest.MostActive(JsonResponse => 
+                {
+                    MostActive = JsonResponse;
+                }
+            ).Wait();
 
-            // ViewBag.MostActive = MostActive;
+            ViewBag.MostActive = MostActive;
+
             return View();
         }
-        [HttpPost]
+        [HttpGet]
         [Route("stock-index/find")]
         public object Find(string query)
         {
             System.Console.WriteLine(query);
-            var AllIdx = new List<Dictionary<string, string>>();
-            WebRequest.FindStockData(query, JsonResponse =>
-                {
-                    AllIdx = JsonResponse;
-                }
-            ).Wait();
+            // var AllIdx = new List<Dictionary<string, string>>();
+            // WebRequest.FindStockData(query, JsonResponse =>
+            //     {
+            //         AllIdx = JsonResponse;
+            //     }
+            // ).Wait();
 
             List<Dictionary<string,string>> Matches = new List<Dictionary<string,string>>();
             
-            foreach(var idx in AllIdx)
+            foreach(var idx in _stocks)
             {
                 foreach(KeyValuePair<string,string> pair in idx)
-                {
+                {         
                     TextInfo myTI = new CultureInfo("en-US").TextInfo;
                     if(pair.Value.Contains(query) || pair.Value.Contains(query.ToUpperInvariant()) )
                     {
                         Matches.Add(new Dictionary<string, string>(idx));
-                    }
-                    else if(pair.Value.StartsWith(query.ToUpper()))
-                    {
-                        Matches.Add(new Dictionary<string,string>(idx));
-                        break;
                     }
                 }
             }
