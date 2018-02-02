@@ -16,8 +16,6 @@ namespace YahooFinance.Controllers
     public class AccountController : Controller
     {
         private YahooFinanceContext _context;
-        // private readonly UserManager<User> _userManager;
-        // private readonly SignInManager<User> _signInManager;
         public AccountController(YahooFinanceContext context)
         {
             _context = context;
@@ -34,7 +32,7 @@ namespace YahooFinance.Controllers
 
         [HttpPost]
         [Route("register")]
-        public IActionResult Register(Register regUser)
+        public IActionResult Register(Register regUser, Portfolio portfolio)
         {
             User exists = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
             if (ModelState.IsValid)
@@ -60,6 +58,26 @@ namespace YahooFinance.Controllers
 
                     User LoggedIn = _context.Users.SingleOrDefault(user => user.Email == regUser.Email);
                     HttpContext.Session.SetInt32("UserId", LoggedIn.UserId);
+                    HttpContext.Session.SetString("userName", LoggedIn.FirstName);
+
+
+                    int? id = HttpContext.Session.GetInt32("userId");
+                    User currentUser = _context.Users.SingleOrDefault(u => u.UserId == (int)id);
+
+                     Portfolio thisportfolio = _context.Portfolios.SingleOrDefault(w => w.PortfolioId == (int)id);
+
+                    Portfolio newPortfolio = new Portfolio
+                    {
+                        UserId = portfolio.UserId,
+                       
+                    };
+                     _context.Add(newPortfolio);
+                    _context.SaveChanges();
+
+                    
+
+
+
                     //If the creation failed, add the errors to the View Model
                     return Redirect("/");
                 }

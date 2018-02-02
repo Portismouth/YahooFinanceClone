@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
 <div class="row">
     <div id="top-bar">
         <span class="glyphicon glyphicon-home"></span>
@@ -83,6 +84,7 @@
         </ul>
     </div>
 </div>
+<p> @TempData["userName"]    </p>
 <div class="portfolio-head">
     <h4><span>My Portfolios</span>/My Watchlist</h4>
     <a href="#"><span class="glyphicon glyphicon-plus" style="-webkit-text-stroke: 2.5px white; font-size: 16px;"></span>Create Portfolio</a>
