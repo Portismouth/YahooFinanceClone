@@ -149,7 +149,7 @@ namespace YahooFinance
             {
                 try
                 {
-                    Client.BaseAddress = new Uri($"https://api.iextrading.com/1.0/stock/{Symbol}/quote?filter=symbol,latestPrice,companyName,open");
+                    Client.BaseAddress = new Uri($"https://api.iextrading.com/1.0/stock/{Symbol}/quote?filter=symbol,latestPrice,companyName,open,previousClose,latestVolume,close,week52High");
                     HttpResponseMessage Response = await Client.GetAsync(""); // Make the actual API call.
                     Response.EnsureSuccessStatusCode(); // Throw error if not successful.
                     string StringResponse = await Response.Content.ReadAsStringAsync(); // Read in the response as a string.

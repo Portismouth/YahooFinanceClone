@@ -40,12 +40,6 @@ namespace YahooFinance.Controllers
 
 
            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
-<<<<<<< HEAD
-=======
-            int? id = HttpContext.Session.GetInt32("UserId");
-            TempData["userName"] = HttpContext.Session.GetString("UserName");
-            User UserInfo = _context.Users.SingleOrDefault(user => user.UserId == id);
->>>>>>> f1d8b2ad07e8b1c6c8cd1d3465fbca0d159e6e5b
             ViewBag.UserInfo = UserInfo;
             // var DJI = new Dictionary<string, object>();
             // WebRequest.GetMarketData("TIME_SERIES_INTRADAY", "DJI", "1min", JsonResponse =>

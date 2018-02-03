@@ -211,3 +211,11 @@ background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
 .mkt-overview img {
     display: inline-block;
 }
+.search-nav {
+    justify-content: center;
+}
+.stock-overview li {
+    list-style: none;
+    font-weight: bold;
+    margin-left: -20px;
+}

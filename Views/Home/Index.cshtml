@@ -26,23 +26,19 @@
         <form action="/search" method="POST" class="search-form">
             <input type="text" placeholder="Search for news, sympbols or companies" id="stock-name" name="query"> <button class="button">Search</button>
         </form>
-        <span class="glyphicon glyphicon-bell"></span>
-        <span class="glyphicon glyphicon-envelope"></span>
-
-    
-        </div>
-         @{
-            if(ViewBag.UserId == null){
-        <a href="/signin"><button >Signin</button></a>
-
+        @{
+            if(ViewBag.UserId == null)
+            {
+                <a href="/signin"><button >Signin</button></a>
             }
             else
             {
+                <p style="display: inline-block;">Welcome @TempData["userName"]</p>
                 <a href="/logout"><button >Logout</button></a> <br>
-
-                <h4>Welcome @TempData["userName"]</h4>
             }
         }
+</div>
+
       
     <div id="fin-links">
         <ul>
@@ -130,7 +126,7 @@
         {
             <div class="story-container">
                 <li>
-                    <h5><a href="@story["url"]">@story["headline"]</a></h5>
+                    <h5 class="mkt-name"><a href="@story["url"]">@story["headline"]</a></h5>
                 </li>
                 <hr>
             </div>
